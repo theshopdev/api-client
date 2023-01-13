@@ -1,0 +1,16 @@
+{
+    "name": "theshopdev/api-client",
+    "description": "theshop API client for Laravel.",
+    "authors": [
+        {
+            "name": "Patrik Simonic",
+            "email": "patrik@hellothe.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Theshop\\ApiClient\\": "src/"
+        }
+    }
+}
