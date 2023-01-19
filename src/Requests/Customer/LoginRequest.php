@@ -14,7 +14,7 @@ class LoginRequest extends AbstractRequest
         public readonly string $password
     ) {
         $this->options = [
-            'query' => [
+            'form_params' => [
                 'email'    => $this->email,
                 'password' => $this->password,
             ],
