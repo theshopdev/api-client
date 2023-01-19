@@ -11,7 +11,7 @@ class ApiClientServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/theshop-api-client.php', 'theshop-api-client');
 
-        $this->app->singleton(Connector::class);
+        $this->app->bind(Connector::class);
 
         $this->callAfterResolving(Connector::class, static function (Connector $connector) {
             self::registerTheShopConnector($connector);
