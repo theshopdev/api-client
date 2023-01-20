@@ -4,8 +4,8 @@ namespace Theshop\ApiClient;
 
 use GuzzleHttp\Psr7\Response;
 use JsonException;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Theshop\ApiClient\Enums\RequestMethodEnum;
+use Theshop\ApiClient\Enums\ResponseCodeEnum;
 use Theshop\ApiClient\Exceptions\APIMaintenanceException;
 use Theshop\ApiClient\Exceptions\APINotFoundException;
 use Theshop\ApiClient\Exceptions\APIServerException;
@@ -42,32 +42,32 @@ abstract class AbstractRequest
      */
     public function processResponse(Response $response): ResponseDTO
     {
-        if ($response->getStatusCode() === ResponseAlias::HTTP_SERVICE_UNAVAILABLE) {
+        if ($response->getStatusCode() === ResponseCodeEnum::HTTP_SERVICE_UNAVAILABLE) {
             throw new APIMaintenanceException();
         }
 
-        if ($response->getStatusCode() === ResponseAlias::HTTP_INTERNAL_SERVER_ERROR) {
+        if ($response->getStatusCode() === ResponseCodeEnum::HTTP_INTERNAL_SERVER_ERROR) {
             throw new APIServerException();
         }
 
-        if ($response->getStatusCode() === ResponseAlias::HTTP_UNAUTHORIZED) {
+        if ($response->getStatusCode() === ResponseCodeEnum::HTTP_UNAUTHORIZED) {
             throw new APIUnauthorizedException();
         }
 
-        if ($response->getStatusCode() === ResponseAlias::HTTP_UNPROCESSABLE_ENTITY) {
+        if ($response->getStatusCode() === ResponseCodeEnum::HTTP_UNPROCESSABLE_ENTITY) {
             try {
                 return new ResponseDTO(
-                    code: ResponseAlias::HTTP_UNPROCESSABLE_ENTITY,
+                    code: ResponseCodeEnum::HTTP_UNPROCESSABLE_ENTITY,
                     data: json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR)
                 );
             } catch (JsonException) {
                 return new ResponseDTO(
-                    code: ResponseAlias::HTTP_UNPROCESSABLE_ENTITY
+                    code: ResponseCodeEnum::HTTP_UNPROCESSABLE_ENTITY
                 );
             }
         }
 
-        if ($response->getStatusCode() === ResponseAlias::HTTP_NOT_FOUND) {
+        if ($response->getStatusCode() === ResponseCodeEnum::HTTP_NOT_FOUND) {
             throw new APINotFoundException();
         }
 
