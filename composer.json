@@ -1,6 +1,7 @@
 {
   "name": "theshopdev/api-client",
   "description": "theshop API client for Laravel.",
+  "license": ["MIT"],
   "authors": [
     {
       "name": "Patrik Simonic",
