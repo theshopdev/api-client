@@ -38,7 +38,7 @@ class UserUpdateRequest extends AbstractRequest
         public readonly bool $is_newsletter_active = false,
     ) {
         $this->options = [
-            'body' => [
+            'body' => json_encode([
                 'name'                  => $this->name,
                 'email'                 => $this->email,
                 'phone'                 => $this->phone,
@@ -65,7 +65,7 @@ class UserUpdateRequest extends AbstractRequest
                 'company_state'         => $this->company_state ?? null,
                 'company_country'       => $this->company_country ?? null,
                 'is_newsletter_active'  => $this->is_newsletter_active,
-            ],
+            ]),
         ];
     }
 }
