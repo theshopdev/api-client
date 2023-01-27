@@ -31,6 +31,7 @@ class ProductListRequest extends AbstractRequest
                 'order'         => $this->order,
                 'min_price'     => $this->minPrice,
                 'max_price'     => $this->maxPrice,
+                'attributes'    => $this->attributes,
                 'tags'          => $this->tags,
                 'brand'         => $this->brandUuid,
                 'category'      => $this->categoryUuid,
