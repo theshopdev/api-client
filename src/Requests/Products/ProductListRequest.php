@@ -21,7 +21,8 @@ class ProductListRequest extends AbstractRequest
         public readonly string $categoryUuid = '',
         public readonly bool $showSoldOut = false,
         public readonly array $flags = [],
-        public readonly ?string $keyword = null
+        public readonly ?string $keyword = null,
+        public readonly ?string $customerGroupUuid = null
     ) {
         $this->options = [
             'query' => [
@@ -38,6 +39,7 @@ class ProductListRequest extends AbstractRequest
                 'show_sold_out' => (int) $this->showSoldOut,
                 'flags'         => $this->flags,
                 'keyword'       => $this->keyword,
+                'apply_customer_group' => $this->customerGroupUuid
             ],
         ];
     }
