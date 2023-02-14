@@ -3,11 +3,12 @@
 namespace Theshop\ApiClient\Requests\Checkout;
 
 use Theshop\ApiClient\AbstractRequest;
+use Theshop\ApiClient\Enums\RequestMethodEnum;
 
 class CreateOrderRequest extends AbstractRequest
 {
     protected string $url = 'v1/checkout';
-    protected string $method = 'post';
+    protected string $method = RequestMethodEnum::POST;
 
     public function __construct(
         private readonly string $currency,

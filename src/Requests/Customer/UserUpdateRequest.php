@@ -3,11 +3,12 @@
 namespace Theshop\ApiClient\Requests\Customer;
 
 use Theshop\ApiClient\AbstractRequest;
+use Theshop\ApiClient\Enums\RequestMethodEnum;
 
 class UserUpdateRequest extends AbstractRequest
 {
     protected string $url = 'v2/user/update';
-    protected string $method = 'put';
+    protected string $method = RequestMethodEnum::PUT;
 
     public function __construct(
         public readonly string $name,

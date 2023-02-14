@@ -3,11 +3,12 @@
 namespace Theshop\ApiClient\Requests\Customer;
 
 use Theshop\ApiClient\AbstractRequest;
+use Theshop\ApiClient\Enums\RequestMethodEnum;
 
 class RegistrationRequest extends AbstractRequest
 {
     protected string $url = 'v1/auth/register';
-    protected string $method = 'post';
+    protected string $method = RequestMethodEnum::POST;
 
     public function __construct(
         public readonly string $name,
