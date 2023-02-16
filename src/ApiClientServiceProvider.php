@@ -20,7 +20,7 @@ class ApiClientServiceProvider extends ServiceProvider
 
     private static function registerTheShopConnector(Connector $connector)
     {
-        $connector->initConnection(app()->getLocale(), Session::get('currency'), Session::get('access_token'));
+        $connector->initConnection(app()->getLocale(), Session::get('currency', ''), Session::get('access_token'));
     }
 
     public function boot()
