@@ -10,12 +10,14 @@ class ProductCategoryDetailRequest extends AbstractRequest
 
     public function __construct(
         public readonly string $locale,
-        public readonly string $slug,
+        public readonly ?string $slug = null,
+        public readonly ?string $uuid = null,
     ) {
         $this->options = [
             'query' => [
                 'locale' => $this->locale,
                 'slug'   => $this->slug,
+                'uuid'   => $this->uuid
             ],
         ];
     }
