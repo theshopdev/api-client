@@ -11,18 +11,20 @@ class Connector
     public function initConnection(
         string $locale,
         string $currency,
-        ?string $accessToken
+        ?string $accessToken,
+        ?string $shippingCountry
     ): void {
         $this->httpClient = new Client([
             'http_errors' => false,
             'base_uri'    => config('theshop-api-client.api_endpoint'),
             'headers'     => [
-                'Accept'        => 'application/json',
-                'Catalog'       => config('theshop-api-client.catalog'),
-                'Token'         => config('theshop-api-client.api_key'),
-                'locale'        => $locale,
-                'currency'      => $currency,
-                'Authorization' => 'Bearer '.$accessToken,
+                'Accept'           => 'application/json',
+                'Catalog'          => config('theshop-api-client.catalog'),
+                'Token'            => config('theshop-api-client.api_key'),
+                'locale'           => $locale,
+                'currency'         => $currency,
+                'Shipping-Country' => $shippingCountry,
+                'Authorization'    => 'Bearer '.$accessToken,
             ],
         ]);
     }
