@@ -17,7 +17,7 @@ class ProductCategoryDetailRequest extends AbstractRequest
             'query' => [
                 'locale' => $this->locale,
                 'slug'   => $this->slug,
-                'uuid'   => $this->uuid
+                'uuid'   => $this->uuid,
             ],
         ];
     }
