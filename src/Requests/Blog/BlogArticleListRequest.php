@@ -14,7 +14,8 @@ class BlogArticleListRequest extends AbstractRequest
         private readonly int $limit = 0,
         private readonly int $offset = 0,
         private readonly string $order = 'desc',
-        private readonly string $sort = 'score'
+        private readonly string $sort = 'score',
+        public readonly ?string $keyword = null,
     ) {
         $this->options = [
             'query' => [
@@ -24,6 +25,7 @@ class BlogArticleListRequest extends AbstractRequest
                 'order'    => $this->order,
                 'sort'     => $this->sort,
                 'locale'   => $this->locale,
+                'keyword'  => $this->keyword,
             ],
         ];
     }
