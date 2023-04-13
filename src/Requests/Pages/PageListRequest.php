@@ -6,7 +6,7 @@ use Theshop\ApiClient\AbstractRequest;
 
 class PageListRequest extends AbstractRequest
 {
-    protected string $url = 'v1/pages';
+    protected string $url = 'v2/pages';
 
     public function __construct(
         private readonly string $locale,
