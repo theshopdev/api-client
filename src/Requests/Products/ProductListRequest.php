@@ -18,6 +18,7 @@ class ProductListRequest extends AbstractRequest
         public readonly array $attributes = [],
         public readonly array $tags = [],
         public readonly string $brandUuid = '',
+        public readonly string $page = '',
         public readonly string $categoryUuid = '',
         public readonly bool $showSoldOut = false,
         public readonly array $flags = [],
@@ -43,7 +44,8 @@ class ProductListRequest extends AbstractRequest
                 'keyword'       => $this->keyword,
                 'apply_customer_group' => $this->customerGroupUuid,
                 'uuids'         => $this->uuids,
-                'show_only_discounted' => $this->showOnlyDiscounted
+                'show_only_discounted' => $this->showOnlyDiscounted,
+                'page'         => $this->page,
             ],
         ];
     }
