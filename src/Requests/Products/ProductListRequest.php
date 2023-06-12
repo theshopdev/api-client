@@ -25,7 +25,8 @@ class ProductListRequest extends AbstractRequest
         public readonly ?string $keyword = null,
         public readonly ?string $customerGroupUuid = null,
         public readonly ?array $uuids = [],
-        public readonly ?string $showOnlyDiscounted = null
+        public readonly ?string $showOnlyDiscounted = null,
+        public readonly array $additionalProductData = [],
     ) {
         $this->options = [
             'query' => [
@@ -46,6 +47,7 @@ class ProductListRequest extends AbstractRequest
                 'uuids'         => $this->uuids,
                 'show_only_discounted' => $this->showOnlyDiscounted,
                 'page'         => $this->page,
+                'additional_product_data' => $this->additionalProductData
             ],
         ];
     }
