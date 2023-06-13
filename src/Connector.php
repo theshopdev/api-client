@@ -3,6 +3,7 @@
 namespace Theshop\ApiClient;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Promise\Utils;
 
 class Connector
 {
@@ -44,5 +45,27 @@ class Connector
                 $request->getOptions()
             )
         );
+    }
+
+    public function sendMultiple(array $requests): array
+    {
+        $promises = [];
+
+        foreach($requests as $requestKey => $requestObject) {
+            $promises[$requestKey] = $this->httpClient->requestAsync(
+                $requestObject->getMethod(),
+                $requestObject->getUrl(),
+                $requestObject->getOptions()
+            );
+        }
+
+        $responses = Utils::unwrap($promises);
+        $data = [];
+
+        foreach($requests as $requestKey => $requestObject) {
+            $data[$requestKey] = $requests[$requestKey]->processResponse($responses[$requestKey]);
+        }
+
+        return $data;
     }
 }
