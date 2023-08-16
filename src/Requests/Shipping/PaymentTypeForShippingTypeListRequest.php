@@ -12,7 +12,8 @@ class PaymentTypeForShippingTypeListRequest extends AbstractRequest
         public readonly string $locale,
         public readonly string $currency,
         public readonly string $shippingCountryUuid,
-        public readonly string $shippingTypeUuid
+        public readonly string $shippingTypeUuid,
+        public readonly ?string $shipping_weight = null,
     ) {
         $this->options = [
             'query' => [
@@ -20,6 +21,7 @@ class PaymentTypeForShippingTypeListRequest extends AbstractRequest
                 'currency' => $this->currency,
                 'country'  => $this->shippingCountryUuid,
                 'shipping' => $this->shippingTypeUuid,
+                'shipping_weight' => $this->shipping_weight,
             ],
         ];
     }
