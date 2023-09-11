@@ -9,6 +9,7 @@ use Theshop\ApiClient\Enums\ResponseCodeEnum;
 use Theshop\ApiClient\Exceptions\APIMaintenanceException;
 use Theshop\ApiClient\Exceptions\APINotFoundException;
 use Theshop\ApiClient\Exceptions\APIServerException;
+use Theshop\ApiClient\Exceptions\APITooManyRequestsException;
 use Theshop\ApiClient\Exceptions\APIUnauthorizedException;
 
 abstract class AbstractRequest
@@ -39,6 +40,7 @@ abstract class AbstractRequest
      * @throws APINotFoundException
      * @throws APIServerException
      * @throws APIUnauthorizedException
+     * @throws APITooManyRequestsException
      */
     public function processResponse(Response $response): ResponseDTO
     {
@@ -52,6 +54,14 @@ abstract class AbstractRequest
 
         if ($response->getStatusCode() === ResponseCodeEnum::HTTP_UNAUTHORIZED) {
             throw new APIUnauthorizedException();
+        }
+
+        if ($response->getStatusCode() === ResponseCodeEnum::HTTP_TOO_MANY_REQUESTS) {
+            throw new APITooManyRequestsException(
+                $this->getMethod(),
+                $this->getUrl(),
+                $this->getOptions(),
+            );
         }
 
         if ($response->getStatusCode() === ResponseCodeEnum::HTTP_UNPROCESSABLE_ENTITY) {

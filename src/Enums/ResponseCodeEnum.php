@@ -9,4 +9,5 @@ final class ResponseCodeEnum
     public const HTTP_UNAUTHORIZED = 401;
     public const HTTP_UNPROCESSABLE_ENTITY = 422;
     public const HTTP_NOT_FOUND = 404;
+    public const HTTP_TOO_MANY_REQUESTS = 429;
 }
