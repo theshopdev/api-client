@@ -12,12 +12,14 @@ class OrderPaymentLinkRequest extends AbstractRequest
         public readonly string $uuid,
         public readonly string $success_url,
         public readonly string $error_url,
+        public readonly ?string $identifier = null
     ) {
         $this->options = [
             'query' => [
                 'uuid' => $this->uuid,
                 'success_url' => $this->success_url,
-                'error_url' => $this->error_url
+                'error_url' => $this->error_url,
+                'identifier' => $this->identifier
             ]
         ];
     }
