@@ -21,7 +21,7 @@ class ShippingTypeListRequest extends AbstractRequest
                 'currency' => $this->currency,
                 'country'  => $this->shippingCountryUuid,
                 'shipping_weight' => $this->shipping_weight,
-                'has_catalog_restriction' => $this->has_catalog_restriction,
+                'has_catalog_restriction' => is_null($this->has_catalog_restriction) || $this->has_catalog_restriction === false ? '0' : '1',
             ],
         ];
     }
