@@ -34,6 +34,34 @@ class Connector
         ]);
     }
 
+    public function setLocale(string $locale): void
+    {
+        $config = $this->httpClient->getConfig();
+
+        $headers = $config['headers'] ?? [];
+        $headers['locale'] = $locale;
+
+        $this->httpClient = new Client([
+            'base_uri'    => $config['base_uri'],
+            'http_errors' => false,
+            'headers'     => $headers,
+        ]);
+    }
+
+    public function setCurrency(string $currency): void
+    {
+        $config = $this->httpClient->getConfig();
+
+        $headers = $config['headers'] ?? [];
+        $headers['currency'] = $currency;
+
+        $this->httpClient = new Client([
+            'base_uri'    => $config['base_uri'],
+            'http_errors' => false,
+            'headers'     => $headers,
+        ]);
+    }
+
     public
     function send(
         AbstractRequest $request
