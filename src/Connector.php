@@ -9,6 +9,8 @@ class Connector
 {
     private Client $httpClient;
     private string $catalog;
+    private string $baseUri;
+    private array $headers = [];
 
     public function initConnection(
         string $locale,
@@ -18,48 +20,42 @@ class Connector
         ?string $catalog
     ): void {
         $this->catalog = $catalog ?? config('theshop-api-client.catalog');
+        $this->baseUri = config('theshop-api-client.api_endpoint');
 
-        $this->httpClient = new Client([
+        $this->headers = [
+            'Accept'           => 'application/json',
+            'Catalog'          => $this->catalog,
+            'Token'            => config('theshop-api-client.api_key'),
+            'locale'           => $locale,
+            'currency'         => $currency,
+            'Shipping-Country' => $shippingCountry,
+            'Authorization'    => 'Bearer '.$accessToken,
+        ];
+
+        $this->httpClient = $this->buildClient();
+    }
+
+    private function buildClient(): Client
+    {
+        return new Client([
             'http_errors' => false,
-            'base_uri'    => config('theshop-api-client.api_endpoint'),
-            'headers'     => [
-                'Accept'           => 'application/json',
-                'Catalog'          => $this->catalog,
-                'Token'            => config('theshop-api-client.api_key'),
-                'locale'           => $locale,
-                'currency'         => $currency,
-                'Shipping-Country' => $shippingCountry,
-                'Authorization'    => 'Bearer '.$accessToken,
-            ],
+            'base_uri'    => $this->baseUri,
+            'headers'     => $this->headers,
         ]);
     }
 
     public function setLocale(string $locale): void
     {
-        $config = $this->httpClient->getConfig();
+        $this->headers['locale'] = $locale;
 
-        $headers = $config['headers'] ?? [];
-        $headers['locale'] = $locale;
-
-        $this->httpClient = new Client([
-            'base_uri'    => $config['base_uri'],
-            'http_errors' => false,
-            'headers'     => $headers,
-        ]);
+        $this->httpClient = $this->buildClient();
     }
 
     public function setCurrency(string $currency): void
     {
-        $config = $this->httpClient->getConfig();
+        $this->headers['currency'] = $currency;
 
-        $headers = $config['headers'] ?? [];
-        $headers['currency'] = $currency;
-
-        $this->httpClient = new Client([
-            'base_uri'    => $config['base_uri'],
-            'http_errors' => false,
-            'headers'     => $headers,
-        ]);
+        $this->httpClient = $this->buildClient();
     }
 
     public
