@@ -4,7 +4,7 @@ namespace Theshop\ApiClient\Enums;
 
 final class RequestMethodEnum
 {
-    public const GET = 'get';
-    public const POST = 'post';
-    public const PUT = 'put';
+    public const GET = 'GET';
+    public const POST = 'POST';
+    public const PUT = 'PUT';
 }
